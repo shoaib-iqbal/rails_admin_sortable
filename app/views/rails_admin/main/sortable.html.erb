@@ -1,0 +1,32 @@
+<legend><%= t 'title_section' %></legend>
+
+<ul id="sortable">
+  <% @abstract_model.all.each do |o| %>
+    <li class="sortable-container">
+      <span class="ref_number">
+        <% unless @sortable_section.position_method.nil? %>
+          <%= o.send(@sortable_section.position_method) %>
+        <% end %>
+      </span>
+      <span class="li_sortable_label">
+        <% if @sortable_section.label_method.nil? %>
+          <%= o.to_s %>
+        <% else %>
+          <%= o.send(@sortable_section.label_method) %>
+        <% end %>
+      </span>
+    </li>
+  <% end %>
+</ul>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $("#sortable").sortable({
+      placeholder: "ui-state-highlight"
+    });
+    $("#sortable").disableSelection();
+    $('.ref_number').each(function (i, elem) {
+      $(this).html(i + 1);
+    })
+  });
+</script>

@@ -1,0 +1,10 @@
+fr:
+  admin:
+    actions:
+      sortable:
+        title: "Trier"
+        menu: "Trier"
+        breadcrumb: "Sortable"
+        link: "Trier"
+        done: "Trié"
+        title_section: Effectuer un tri

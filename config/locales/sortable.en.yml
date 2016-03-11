@@ -1,0 +1,10 @@
+en:
+  admin:
+    actions:
+      sortable:
+        title: "Sortable"
+        menu: "Sort"
+        breadcrumb: "Sortable"
+        link: "Sortable"
+        done: "Sorted"
+        title_section: Make a sort
