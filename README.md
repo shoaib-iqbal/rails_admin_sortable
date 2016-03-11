@@ -6,6 +6,14 @@ Screenshot soon !
 This section provides the behavior of sortable model in rails_admin.
 Jquery UI sortable is used.
 
+**You have to load sortable gem before rails_admin one.**
+
+In gemfile
+
+````
+gem 'rails_admin_sortable', git: 'https://github.com/rollincode/rails_admin_sortable.git'
+gem 'rails_admin'
+````
 
 Example `config/initializers/rails_admin.rb`
 
