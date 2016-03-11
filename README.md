@@ -50,3 +50,12 @@ end
 `label_method` is used for showing the model name (eg: title, etc)
 
 `position_method` is used for the model position method
+
+#### TODO ####
+
+- [ ] Logic
+- [ ] Design
+- [ ] Test
+- [ ] Translation
+- [ ] Refactoring
+- [ ] Examples + Doc
