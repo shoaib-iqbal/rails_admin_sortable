@@ -1,8 +1,16 @@
-<legend><%= t 'title_section' %></legend>
+<div class="alert-status"></div>
 
+<em>
+  <%= t 'helper_soratble' %>
+</em>
+
+<br />
+<br />
+
+<legend><%= t 'title_section' %></legend>
 <ul id="sortable">
-  <% @abstract_model.all.each do |o| %>
-    <li class="sortable-container">
+  <% @objects.each do |o| %>
+    <li data-id="<%= o.id %>" data-position="" class="sortable-container">
       <span class="ref_number">
         <% unless @sortable_section.position_method.nil? %>
           <%= o.send(@sortable_section.position_method) %>
@@ -21,12 +29,45 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function () {
+    handleBaseNumberJs();
+
     $("#sortable").sortable({
-      placeholder: "ui-state-highlight"
+      axis: 'y',
+      placeholder: "ui-state-highlight",
+      update: function () {
+        $.when(handleBaseNumberJs()).done(function () {
+          $('.btn-validate').attr( "disabled", "disabled" );
+
+          var ordered = [];
+          $('.sortable-container').each(function (i, elem) {
+            ordered.push({id: $(this).attr('data-id'), position: $(this).attr('data-position')});
+          });
+
+          $.ajax({
+            type: "POST",
+            url: '<%= sortable_path(:model_name => @abstract_model.to_param) %>',
+            data: { 'data': ordered },
+            success: function (data) {
+              $('.btn-validate').removeAttr("disabled");
+              $('.alert-status').html('<div class="alert alert-dismissible alert-success"> <button class="close" data-dismiss="alert" type="button">×</button>Modification éffectuée avec succès</div>').fadeIn().delay(3000).fadeOut();
+            },
+            error: function (data) {
+              $('.alert-status').html('<div class="alert alert-dismissible alert-danger"> <button class="close" data-dismiss="alert" type="button">×</button>Erreur lors de la modification</div>').fadeIn().delay(3000).fadeOut();
+            }
+          });
+        });
+      }
     });
+
     $("#sortable").disableSelection();
-    $('.ref_number').each(function (i, elem) {
-      $(this).html(i + 1);
-    })
+
+    function handleBaseNumberJs() {
+      $('.ref_number').each(function (i, elem) {
+        $(elem).html(i + 1);
+      });
+      $('.sortable-container').each(function (i, elem) {
+        $(elem).attr('data-position', i + 1)
+      });
+    }
   });
 </script>
