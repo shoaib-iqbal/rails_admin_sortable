@@ -1,10 +1,13 @@
 [WIP] - RailsAdmin Rollincode Sortable Section
 --------------------
 
-Screenshot soon !
+![screenshort]
+(http://i.imgur.com/ndh99X3.jpg)
 
 This section provides the behavior of sortable model in rails_admin.
 Jquery UI sortable is used.
+
+All call are done in AJAX
 
 **You have to load sortable gem before rails_admin one.**
 
@@ -49,12 +52,12 @@ end
 
 `label_method` is used for showing the model name (eg: title, etc)
 
-`position_method` is used for the model position method
+`position_method` is used for the model position method and is **mandatory**
 
 #### TODO ####
 
-- [ ] Logic
-- [ ] Design
+- [X] Logic
+- [X] Design
 - [ ] Test
 - [ ] Translation
 - [ ] Refactoring
